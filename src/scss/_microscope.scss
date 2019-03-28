@@ -1,0 +1,63 @@
+@import "_variables";
+
+#microscope{
+    position: relative;
+    display: inline-block;
+    background: blue;
+    width: 100%;
+    overflow-x: hidden;
+
+    #microscope_img{
+        position: relative;
+    }
+
+    img{
+        display: block;
+        width: 100%;
+    }
+
+    .zoom{
+        position: absolute;
+        width: 15%;
+        height: 10%;
+        border: 2px solid #000;
+        cursor: zoom-in;
+
+        &:hover{
+            border-color: #fff;
+        }
+
+        span{
+            position: absolute;
+            top: -20px;
+            left: 5px;
+        }
+    }
+
+    #legenda_fade{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(229, 229, 229, 0) 0%,#000 100%);
+        min-height: 200px;
+    }
+
+    #legenda{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        min-height: 200px;
+    }
+}
+
+@media only screen and (min-width: 1050px) {
+    #microscope{
+        #microscope_img{
+            width: 850px;
+        }
+    }
+}

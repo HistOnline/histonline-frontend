@@ -1,0 +1,46 @@
+@import "_variables";
+
+.placeholder_input{
+    position: relative;
+    margin-bottom: 5px;
+    display: block;
+
+    input{
+        padding: 25px 20px 15px 20px;
+        font-size: 1.2em;
+        border: none;
+        min-width: 250px;
+        background: rgba(255, 255, 255, 0.98);
+        outline: none;
+
+        &.align-center{
+            text-align: center;
+        }
+
+        &.big{
+            font-size: 1.5em;
+        }
+
+        &:focus{
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        &:focus, &.filled{
+
+            & + label{
+                top: 10px;
+                left: 20px;
+                font-size: .7em;
+                color: $primary;
+            }
+        }
+    }
+
+    label{
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        color: #ccc;
+        transition: .5s all;
+    }
+}
