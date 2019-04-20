@@ -8,29 +8,19 @@ class CheckLogin extends Component {
         // 1 = logado, 2 = logando, 0 = negado
         this.state = {
             logged: false
-        }
-
-        this.CheckLogin();
-        
+        }        
     }
 
-    CheckLogin = () => {
+    checkLogin = () => {
         const localToken = localStorage.getItem("histonline_token");
 
         if(localToken){
-            fetch('http://localhost:5000/checkLogin' , {
-            method: "GET",
-            headers: {
-                "Authorization": "JWT "+localToken
-            }
-            })
-            .then( (data) => { 
-                return data.text();
-            }).then( (jwt) => {
-                const logged = JSON.parse(jwt).logged;
-                this.setState({logged});
-            })
-        }    
+            this.setState({ logged : true })
+        }   
+    }
+
+    componentDidMount(){
+        this.checkLogin();
     }
 
     render(){

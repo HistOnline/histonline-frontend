@@ -36,7 +36,7 @@ class Login extends Component {
     .then(function(data) {
       console.log(data);  
       return data.text();
-    }).then(function(jwt){
+    }).then(function(jwt){      
       const token = JSON.parse(jwt).access_token;
       if(token) localStorage.setItem("histonline_token", token);
       if(token) window.location.href = "./";
