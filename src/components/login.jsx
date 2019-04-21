@@ -74,10 +74,13 @@ class Login extends Component {
           </p>
         </div>
 
-        <div className="whatsthis">
+        <div className="whatsthis just_desktop">
           <h3>O que é isso?</h3><br/>
-          <span>Descrição da lâmina com curiosidades e principais características em foco. {this.props.error ? aviso(this.props.error) : null }</span>
+          <span>Descrição da lâmina com curiosidades e principais características em foco.</span>
         </div>
+
+        {this.props.error ? aviso(this.props.error) : null }
+        
         </section>
     )
   }
