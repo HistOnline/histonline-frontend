@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import { Menu, ExpandMore } from '@material-ui/icons';
 
-import Collapsible from 'react-collapsible';
-
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
