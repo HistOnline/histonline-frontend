@@ -23,7 +23,7 @@ class Login extends Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    fetch('http://localhost:5000/auth' , {
+    fetch(`${process.env.REACT_APP_API}/auth` , {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
