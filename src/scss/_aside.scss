@@ -56,7 +56,7 @@ aside{
             display: block;
         }
     }
-    
+
     #main_menu_bt{
         svg{
             fill: $eosina;
@@ -100,5 +100,10 @@ aside{
                 }
             }
         }
+    }
+
+    .category_title_list{
+        color: $eosina;
+        font-weight: bold;
     }
 }

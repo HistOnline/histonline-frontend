@@ -94,12 +94,20 @@ main{
     width: 100vw;
     
     section.first_col{
-      width: 50vh;
+      width: 50vw;
     }
 
     #microscope{
       position: sticky;
       top: 100px;
+    }
+
+    > * {
+      transition: .5s all;
+    }
+
+    #descricao_lamina{
+      padding-top: 100px;
     }
   }
 

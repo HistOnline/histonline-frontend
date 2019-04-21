@@ -56,7 +56,7 @@ class Main extends Component {
               <h3>ID: {this.props.match.params.name_id}</h3>
               <span className="scroll_message">Role a página para mais informações</span>
             </section>
-            <OnVisible onChange={this.onScroll} percent="100" >TESTE</OnVisible>
+            <OnVisible onChange={this.onScroll} percent="100"/>
             <About className={`${scrollClass}`}/>
           </section>
         </main>
