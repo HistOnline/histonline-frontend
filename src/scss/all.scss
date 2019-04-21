@@ -103,6 +103,22 @@ main{
     }
   }
 
+  @media (max-width: 991.98px) {
+    &.scrolled{
+      flex-wrap: wrap; 
+      width: 100vw;
+      
+      section.first_col{
+        width: auto;
+      }
+  
+      #microscope{
+        position: relative;
+        top: auto;
+      }
+    }
+  }
+
   .logo{
     height: 80px;
     opacity: .8;

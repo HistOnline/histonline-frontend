@@ -18,6 +18,8 @@ export default class Aside extends Component {
     super(props);
 
     this.state = {
+      menuIsVisible: false,
+      toggleMenuVisibility: () => this.state.menuIsVisible ? this.setState({ menuIsVisible : false }) : this.setState({ menuIsVisible : true }),
       nav: [
         {
           "categoria" : "Assunto XYZ"
@@ -28,8 +30,8 @@ export default class Aside extends Component {
 
   render() {
     return (
-      <aside className={this.props.className}>
-        <IconButton id="main_menu_bt" className="just_mobile">
+      <aside className={`${this.props.className} ${this.state.menuIsVisible ? "opened" : "closed"}`}>
+        <IconButton id="main_menu_bt" className="just_mobile" onClick={this.state.toggleMenuVisibility}>
           <Menu/>
         </IconButton>
         <nav>
