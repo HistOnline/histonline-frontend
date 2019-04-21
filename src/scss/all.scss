@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin|Open+Sans');
+
 @import "_variables";
 @import "_mixins";
+
 @import "_placeholder_input";
 @import "_aside";
 @import "_microscope";
@@ -9,6 +11,7 @@
 /* --------- GENERAL ---------- */
 
 body{
+  font-family: "Open Sans", Helvetica, sans-serif;
   @include marginpadd0;
 }
 
@@ -81,8 +84,47 @@ main{
 }
 
 #page{
-  display: inline-block;
-  width: calc(100vw - 250px);
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100vw - 300px);
+  padding: 10px 5vw;
+  
+  &.scrolled{
+    flex-wrap: nowrap; 
+    width: 100vw;
+    
+    section.first_col{
+      width: 50vh;
+    }
+
+    #microscope{
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  .logo{
+    height: 80px;
+    opacity: .8;
+    margin: 10px 0;
+  }
+
+  section.first_col{
+    min-height: 110vh;
+
+    .reset_div{
+      position: absolute;
+      bottom: -5vh;
+    }
+    
+  }
+}
+
+@media (max-width: 991.98px) {
+  #page{
+    width: 100vw;
+    padding-left: 80px;
+  }
 }
 
 .wrap{
@@ -117,3 +159,21 @@ button{
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }*/
+
+.just_mobile{
+  display: none;
+}
+
+button.just_mobile{
+  display: none;
+}
+
+@media (max-width: 991.98px) {
+  .just_mobile{
+    display: block;
+  }
+
+  button.just_mobile{
+    display: block;
+  }
+}

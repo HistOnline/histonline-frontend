@@ -1,26 +1,87 @@
-@import "_variables";
-@import "_mixins";
-
 aside{
     position: relative;
-    width: 250px;
+    width: 300px;
     min-height: 100vh;
     float: left;
-    background: $hematoxilina;
-    box-shadow: inset 0 0 0 1px $hematoxilina,
-    inset 0 0 1px 2px rgba(255, 255, 255, 0.3);
     overflow-x: hidden;
     box-sizing: border-box;
+    border-right: 1px solid #ccc;
+    padding: 10px 15px;
 
-    img{
-        padding: 20px;
-        max-width: 100%;
-        box-sizing: border-box;
+    @media (max-width: 991.98px) {
+        width: 60px;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        border-color: transparent;
+        
+        &.opened{
+            border-right: 1px solid #ccc;
+            background: #f1f1f1;
+            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav{
+            display: none;
+        }
+    }
+
+    &.scrolled{
+        width: 60px;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        border-color: transparent;
+
+        &.opened{
+            border-right: 1px solid #ccc;
+            background: #f1f1f1;
+            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav{
+            display: none;
+        }
+
+        #main_menu_bt{
+            display: block;
+        }
+    }
+
+    #main_menu_bt{
+        svg{
+            fill: $eosina;
+        }
+    }
+
+    .category{
+        width: 100%;
+        box-shadow: none;
+        text-align: left;
+        font-size: 14px;
+        margin: 0;
+
+        .category_title{
+            padding: 0;
+        }
+
+        .laminas_list{
+            padding: 0;
+
+            li{
+                padding: 10px 0 !important;
+            }
+        }
     }
 
     ul{
         @include marginpadd0();
         list-style: none;
+        margin: 0 !important;
 
         > li{
 

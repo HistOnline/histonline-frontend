@@ -1,42 +1,62 @@
 import React, { Component } from 'react';
-import logo from '../img/logo_white.png';
 
-import { Menu } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
+import { Menu, ExpandMore } from '@material-ui/icons';
 
 import Collapsible from 'react-collapsible';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Input from '@material-ui/core/Input';
 
-class Aside extends Component {
+export default class Aside extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      nav: [
+        {
+          "categoria" : "Assunto XYZ"
+        }
+      ]
+    }
   }
 
   render() {
     return (
-      <aside>
-        <Menu/>
-        <img src={logo} />
-        <Collapsible trigger="Start here">
-          <p>This is the collapsible content. It can be any element or React component you like.</p>
-          <p>It can even be another Collapsible component. Check out the next section!</p>
-        </Collapsible>  
-        <ul>
-          <li>
-            <input type="search" placeholder="Filtro de lâminas" />
-          </li>
-          <li>Categoria A
-            <ul>
-              <li>Lamina A 10x</li>
-              <li>Lamina A Zoom 40x</li>
-              <li>Lamina A</li>
-            </ul>
-          </li>
-        </ul>
+      <aside className={this.props.className}>
+        <IconButton id="main_menu_bt" className="just_mobile">
+          <Menu/>
+        </IconButton>
+        <nav>
+          <List
+            component="ul"
+            subheader={<ListSubheader component="div">Selecione um assunto</ListSubheader>}
+          > 
+            <ListItem>
+            <Input
+              placeholder="Pesquisa"
+            />
+            </ListItem>
+              <ExpansionPanel className="category">
+                <ExpansionPanelSummary className="category_title" expandIcon={<ExpandMore />}>
+                  <ListItem>
+                    Assunto A
+                  </ListItem>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className="laminas_list">
+                  <ListItem button>
+                    Lâmina A
+                  </ListItem>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+          </List>
+        </nav>
       </aside>
     );
   }   
 }
-
-export default Aside;

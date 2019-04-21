@@ -8,7 +8,7 @@ class Main extends Component {
 
   render() {
     return (
-      <section id="aboutDescription">
+      <section id="descricao_lamina" className={this.props.className}>
         <h1>Tecido X</h1>
         <p>Ao rolar só essa parte sobe</p>
         <p>Aqui vai uma explicação da lamina e da patologia, ao passar o mouse aplica a mascara, tem que reduzir a opacidade para quase 0 <MascaraLink>quando passar o mouse</MascaraLink>. Assim será possível ver o micoscópio no fundo</p>
