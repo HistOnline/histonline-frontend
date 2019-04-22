@@ -72,3 +72,21 @@
         }
     }
 }
+
+.scroll_message{
+    display: inline-block;
+    width: 95%;
+    text-align: center;
+    margin-top: 10px;
+    color: #ccc;
+
+    svg{
+        animation: shake_vertical 3s infinite;
+    }
+}
+
+@keyframes shake_vertical{
+    0%{ transform: translateY(10px) }
+    50%{ transform: translateY(0px) }
+    100%{ transform: translateY(10px) }
+}

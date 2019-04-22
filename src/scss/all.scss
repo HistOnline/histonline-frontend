@@ -107,6 +107,7 @@ main{
     #microscope{
       position: sticky;
       top: 100px;
+      z-index: 2;
     }
 
     > * {

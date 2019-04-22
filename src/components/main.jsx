@@ -6,6 +6,11 @@ import Microscope from './microscope';
 import OnVisible from 'react-on-visible';
 import About from './about';
 
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import { Fullscreen, KeyboardArrowDown } from '@material-ui/icons';
+
+
 class Main extends Component {
   constructor(props){
     super(props);
@@ -28,17 +33,8 @@ class Main extends Component {
     }
   }
 
-  resetScrollClass = (visibility) => {
-    console.log("reset", visibility)
-    if(visibility){
-      setTimeout( () => {
-        this.setState({ className : "", visibility : false })
-      }, 2000)
-    }
-
-    if(!this.state.visibility){
-      this.setState({ className : "" })
-    }
+  resetScrollClass = () => {
+    this.setState({ className : "", visibility : false })
   }
 
   render() {
@@ -53,10 +49,12 @@ class Main extends Component {
             <section className={`first_col ${scrollClass}`}>
               <img src={logo}className="logo"/>
               <Microscope className={`${scrollClass}`}/>
-              <h3>ID: {this.props.match.params.name_id}</h3>
-              <span className="scroll_message">Role a página para mais informações</span>
+              {/* <h3>ID: {this.props.match.params.name_id}</h3> */}
+              <IconButton onClick={this.resetScrollClass}><Fullscreen/></IconButton>
+              <Button onClick={this.resetScrollClass}>Ver em Tela Cheia</Button><br/>
+              <span className="scroll_message"><KeyboardArrowDown/> Role a página para mais informações</span>
             </section>
-            <OnVisible onChange={this.onScroll} percent="100"/>
+            <OnVisible onChange={this.onScroll} bounce="true" percent="100"/>
             <About className={`${scrollClass}`}/>
           </section>
         </main>
