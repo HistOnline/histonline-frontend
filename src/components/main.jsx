@@ -5,6 +5,7 @@ import logo from '../img/logo_eosina.png';
 import Microscope from './microscope';
 import OnVisible from 'react-on-visible';
 import About from './about';
+import Footer from './footer';
 
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -58,6 +59,7 @@ class Main extends Component {
             <About className={`${scrollClass}`}/>
           </section>
         </main>
+        <Footer/>
       </CheckLogin>
     );
   }   

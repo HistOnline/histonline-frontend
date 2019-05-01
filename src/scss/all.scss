@@ -180,6 +180,26 @@ button{
   }
 }
 
+/* --------- FOOTER ---------- */
+
+footer#main{
+  background: #ccc;
+  padding: 15px 5vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  box-sizing: border-box;
+
+  div:nth-child(4){
+    width: 100vw;
+    text-align: center;
+  }
+
+  img{
+    height: 100px;
+  }
+}
+
 
 /*
 .App-logo {

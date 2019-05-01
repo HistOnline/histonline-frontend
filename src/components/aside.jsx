@@ -93,6 +93,10 @@ export default class Aside extends Component {
     this.setState({search: e.target.value});
   }
 
+  componentDidMount(){
+    // loadNav();
+  }
+
   render() {
     return (
       <aside className={`${this.props.className} ${this.state.menuIsVisible ? "opened" : "closed"}`}>
