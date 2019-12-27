@@ -79,7 +79,7 @@ class Login extends Component {
           <span>Descrição da lâmina com curiosidades e principais características em foco.</span>
         </div>
 
-        {this.props.error ? aviso(this.props.error) : null }
+        { this.props.error ? aviso(this.props.error) : null }
         
         </section>
     )
