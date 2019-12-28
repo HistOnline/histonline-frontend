@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 import IconButton from '@material-ui/core/IconButton';
 import { Menu, ExpandMore } from '@material-ui/icons';
@@ -60,7 +61,9 @@ export default class Aside extends Component {
         </ListItem>
         {v.laminas.map( lam => (
           <ListItem button>
+            <Link to={`/laminas/${lam.slug}`}>
             {lam.nome}
+            </Link>
           </ListItem>
         ))}
       </div>
@@ -83,7 +86,9 @@ export default class Aside extends Component {
           </ListItem>
           {laminas_temp.map( lam => (
             <ListItem button>
-              {lam.nome}
+              <Link to={`/laminas/${lam.slug}`}>
+            {lam.nome}
+            </Link>
             </ListItem>
           ))}
         </div>

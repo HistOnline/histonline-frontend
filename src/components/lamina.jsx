@@ -20,7 +20,7 @@ const Lamina = props => {
     Laminas.get(slug)
       .then(response => setLamina(response.data))
       .catch(err => console.log('Erro ao obter lâmina:', err))
-  }, [])
+  }, [props.match.params.slug])
 
   return (
     <div>
