@@ -43,14 +43,7 @@ class Main extends Component {
         <main>
           <Aside className={`${scrollClass}`}/>
           <section id="page" className={`wrap ${scrollClass}`}>
-            <section className={`first_col ${scrollClass}`}>
-              <img src={logo}className="logo"/>
-              <Microscope className={`${scrollClass}`}/>
-              {/* <h3>ID: {this.props.match.params.name_id}</h3> */}
-              <IconButton onClick={this.resetScrollClass}><Fullscreen/></IconButton>
-              <Button onClick={this.resetScrollClass}>Ver em Tela Cheia</Button><br/>
-              <span className="scroll_message"><KeyboardArrowDown/> Role a página para mais informações</span>
-            </section>
+            
             <OnVisible onChange={this.onScroll} bounce="true" percent="100"/>
             <About className={`${scrollClass}`}/>
           </section>

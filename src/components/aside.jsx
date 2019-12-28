@@ -8,6 +8,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Input from '@material-ui/core/Input';
 
+import Laminas from '../services/crud/laminas'
+
 export default class Aside extends Component {
   constructor(props){
     super(props);
@@ -94,7 +96,21 @@ export default class Aside extends Component {
   }
 
   componentDidMount(){
-    // loadNav();
+    Laminas.get()
+    .then( response => {
+      let data = response.data;
+      let rwData = []
+      data.map( materia => {
+        rwData.push({
+          categoria: {
+            ID: materia.ID,
+            nome: materia.nome
+          },
+          laminas: [...materia.laminas]
+        })
+      })
+      this.setState({ nav: rwData })
+    })
   }
 
   render() {
