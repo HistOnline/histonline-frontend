@@ -12,23 +12,25 @@ export const Aviso = info => {
   return <div id="aviso">{info}</div>
 }
 
-const Login = ({error}) => {
+const Login = props => {
 
   const [user, setUser] = useState(null)
   const [pass, setPass] = useState(null)
+  const [error, setError] = useState(props.error)
 
   const submit = () => {
-
-    axios.post(`${process.env.REACT_APP_API}/users/v1/auth`, {
-      user,
-      pass
-    })
+    axios.post(`${process.env.REACT_APP_API}/users/v1/auth`,
+      { user, pass })
       .then(function (response) {
         const token = response.data.hash;
+        console.log(token)
         if (token) localStorage.setItem("histonline_token", token);
         if (token) window.location.href = "./";
       })
-      .catch((err) => console.log('Erro de login:', err))
+      .catch((err) => {
+        console.log('Erro de login:', err)
+        setError('Usuário ou senha incorretos')
+      })
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CheckLogin from './check_login';
+import ProtecetdPage from './protected_page';
 import Aside from './aside';
 import logo from '../img/logo_eosina.png';
 import Microscope from './microscope';
@@ -13,14 +13,10 @@ import { Fullscreen, KeyboardArrowDown } from '@material-ui/icons';
 
 
 class Main extends Component {
-  constructor(props){
-    super(props);
-    
-    this.state = {
-      visibility: false,
-      className: ""
-    }
-
+  
+  state = {
+    visibility: false,
+    className: ""
   }
 
   onScroll = (visibility) => {
@@ -43,7 +39,7 @@ class Main extends Component {
     const scrollClass = this.state.className;
 
     return (
-      <CheckLogin>
+      <ProtecetdPage>
         <main>
           <Aside className={`${scrollClass}`}/>
           <section id="page" className={`wrap ${scrollClass}`}>
@@ -60,7 +56,7 @@ class Main extends Component {
           </section>
         </main>
         <Footer/>
-      </CheckLogin>
+      </ProtecetdPage>
     );
   }   
 }
