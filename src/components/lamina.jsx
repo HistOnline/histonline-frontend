@@ -4,7 +4,6 @@ import ProtecetdPage from './protected_page';
 import Aside from './aside';
 import logo from '../img/logo_eosina.png';
 import Microscope from './microscope';
-import OnVisible from 'react-on-visible';
 import Footer from './footer';
 
 import Laminas from '../services/crud/laminas';
@@ -33,7 +32,6 @@ const Lamina = props => {
                 <img src={logo} className="logo" />
                 <Microscope />
                 <h3>ID: {props.match.params.slug}</h3>
-                {/* <Button onClick={this.resetScrollClass}><Fullscreen/>&nbsp;&nbsp;Ver em Tela Cheia</Button><br/> */}
                 <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
               </section>,
               <section id="descricao_lamina">
