@@ -5,7 +5,7 @@ import axios from 'axios'
 
 /**
  * Componente de aviso na tela de login, inicialmente
- * @param {string} info 
+ * @param {string} info Informação de exibição
  */
 export const Aviso = info => {
   console.log('Aviso:', info);
