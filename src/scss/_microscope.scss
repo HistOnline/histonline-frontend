@@ -1,20 +1,32 @@
 #microscope{
     position: relative;
-    display: inline-block;
-    background: blue;
     width: 95%;
     margin: 0 auto;
-    overflow-x: hidden;
+    display: inline-block;
+    background: blue;
     border-radius: 5px;
-    box-shadow: 0 2px 3px #2d2d2d;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 
-    #microscope_img{
+    #microscope_imgs{
+        width: 100%;
         position: relative;
     }
 
-    img{
+    img, .svg_mask{
         display: block;
         width: 100%;
+    }
+
+    .svg_mask{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        svg{
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .zoom{
@@ -61,14 +73,6 @@
             z-index: 2;
             width: 100%;
             min-height: 200px;
-        }
-    }
-}
-
-@media only screen and (min-width: 1050px) {
-    #microscope{
-        #microscope_img{
-            width: 850px;
         }
     }
 }
