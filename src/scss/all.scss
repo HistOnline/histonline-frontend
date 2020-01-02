@@ -99,10 +99,6 @@ main{
   &.scrolled{
     flex-wrap: nowrap; 
     width: 100vw;
-    
-    section.first_col{
-      width: 50vw;
-    }
 
     #microscope{
       position: sticky;
@@ -124,9 +120,6 @@ main{
       flex-wrap: wrap; 
       width: 100vw;
       
-      section.first_col{
-        width: auto;
-      }
   
       #microscope{
         position: relative;
@@ -139,16 +132,6 @@ main{
     height: 80px;
     opacity: .8;
     margin: 10px 0;
-  }
-
-  section.first_col{
-    min-height: 110vh;
-
-    .reset_div{
-      position: absolute;
-      bottom: -5vh;
-    }
-    
   }
 }
 

@@ -17,7 +17,10 @@ const Lamina = props => {
   useEffect(() => {
     const slug = props.match.params.slug
     Laminas.get(slug)
-      .then(response => setLamina(response.data))
+      .then(response => {
+        console.log(response.data)
+        setLamina(response.data)
+      })
       .catch(err => console.log('Erro ao obter lâmina:', err))
   }, [props.match.params.slug])
 
@@ -28,9 +31,9 @@ const Lamina = props => {
           <Aside />
           <section id="page" className={`wrap`}>
             {lamina ? [
-              <section className={`first_col`}>
+              <section>
                 <img src={logo} className="logo" />
-                <Microscope />
+                <Microscope lamina={lamina}/>
                 <h3>ID: {props.match.params.slug}</h3>
                 <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
               </section>,

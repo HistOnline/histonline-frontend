@@ -11,21 +11,6 @@ class Main extends Component {
     className: ""
   }
 
-  // onScroll = (visibility) => {
-  //   console.log("onScroll", visibility);
-  //   if(visibility){
-  //     this.setState({ className : "scrolled", visibility : true })
-  //   }else{
-  //     setTimeout( () => {
-  //       if(!this.state.visibility) this.setState({ className : "", visibility : false })
-  //     }, 2000)
-  //   }
-  // }
-
-  // resetScrollClass = () => {
-  //   this.setState({ className : "", visibility : false })
-  // }
-
   render() {
 
     const scrollClass = this.state.className;
