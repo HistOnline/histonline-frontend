@@ -4,7 +4,6 @@ import ProtecetdPage from './protected_page';
 import Aside from './aside';
 import logo from '../img/logo_eosina.png';
 import Microscope from './microscope';
-import OnVisible from 'react-on-visible';
 import Footer from './footer';
 
 import Button from '@material-ui/core/Button';
