@@ -14,11 +14,11 @@ import { Fullscreen, KeyboardArrowDown } from '@material-ui/icons';
 const Lamina = props => {
 
   const [lamina, setLamina] = useState(null)
+  
   useEffect(() => {
     const slug = props.match.params.slug
     Laminas.get(slug)
       .then(response => {
-        console.log(response.data)
         setLamina(response.data)
       })
       .catch(err => console.log('Erro ao obter lâmina:', err))
