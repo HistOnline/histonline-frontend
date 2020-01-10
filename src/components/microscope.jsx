@@ -9,6 +9,10 @@ export default class Microscope extends Component {
     mascaras: []
   }
 
+  zeroMasks = () => {
+    this.setState({ mascaras: [] }, this.resetMasks)
+  }
+
   resetMasks = () => {
     this.setState({ mascaras: [...this.props.lamina.mascaras] }, this.loadMasks)
   }
@@ -22,13 +26,16 @@ export default class Microscope extends Component {
   loadMask = (url, index) => {
 
     // carrega nova máscara caso a máscara não exista
+    if(!this.state.mascaras[index].svg){
     fetch(url)
       .then(res => res.text())
       .then(text => {
         let mascaras = [...this.state.mascaras]
         mascaras[index].svg = text
+        console.log('Carregando', this.state.mascaras[index].title)
         this.setState({ mascaras }, () => console.log('mascaras', this.state.mascaras))
       });
+    }
   }
 
   loadMasks = () => {
@@ -71,7 +78,7 @@ export default class Microscope extends Component {
     console.log('chamando UPDATE')
     if (prevProps.lamina.ID !== this.props.lamina.ID) {
       console.log('RESETA')
-      this.resetMasks()
+      this.zeroMasks()
     } else {
       console.log('só CARREGA')
       this.loadMasks()
@@ -86,6 +93,7 @@ export default class Microscope extends Component {
         {this.props.lamina ? <div id="microscope_imgs">
           <img src={this.props.lamina.imagem[0]} />
           {this.state.mascaras ? this.state.mascaras.map(({ svg, color }) => {
+            console.log('render svg', typeof(svg))
             return svg ? <Div
               dangerouslySetInnerHTML={{ __html: svg }}
               className="svg_mask"

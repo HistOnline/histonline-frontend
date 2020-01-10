@@ -22,7 +22,6 @@ const Lamina = props => {
           <Aside/>
           <section id="page" className={`wrap`}>
               <img src={logo} className="logo"/>
-              <Microscope/>
               <h3>Erro 404</h3>
               Página não encontrada
           </section>
