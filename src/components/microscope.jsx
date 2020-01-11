@@ -1,110 +1,49 @@
-import React, { Component, useState, useEffect } from 'react';
-import Zoom from './zoom';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
 import { Div } from '../styles/microscope'
 
-export default class Microscope extends Component {
+const loadMasks = (masks) => {
+  return Promise.all((masks || []).map(({ vector }) => {
+    return fetch(vector).then(res => res.text());
+  }));
+};
 
-  state = {
-    mascaras: []
-  }
+const Microscope = ({ lamina }) => {
+  const { mascaras } = lamina;
 
-  zeroMasks = () => {
-    this.setState({ mascaras: [] }, this.resetMasks)
-  }
+  const [svgs, setSvgs] = useState([]);
 
-  resetMasks = () => {
-    this.setState({ mascaras: [...this.props.lamina.mascaras] }, this.loadMasks)
-  }
-
-  /**
-   * Função que coleta svg e atualiza no state assíncronamente
-   * 
-   * @param {string} url 
-   * @param {integer} index 
-   */
-  loadMask = (url, index) => {
-
-    // carrega nova máscara caso a máscara não exista
-    if(!this.state.mascaras[index].svg){
-    fetch(url)
-      .then(res => res.text())
-      .then(text => {
-        let mascaras = [...this.state.mascaras]
-        mascaras[index].svg = text
-        console.log('Carregando', this.state.mascaras[index].title)
-        this.setState({ mascaras }, () => console.log('mascaras', this.state.mascaras))
+  useEffect(() => {
+    loadMasks(mascaras)
+      .then((svgs) => {
+        setSvgs(svgs);
       });
-    }
-  }
+  }, [mascaras]);
 
-  loadMasks = () => {
-    let mascaras = this.state.mascaras
-    mascaras.map(({ vector }, index) => {
-      this.loadMask(vector, index)
-    })
-  }
+  const shouldRenderMasks = !!mascaras.length && !!svgs.length;
 
-  componentDidMount() {
-    this.resetMasks()
-  }
+  return (
+    <section id="microscope">
+      {lamina && (
+        <div id="microscope_imgs">
+          <img alt="" src={lamina.imagem[0]} />
+          {shouldRenderMasks && mascaras.map(({ color, id }, idx) => {
+            const svg = svgs[idx];
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('Verificando atualização')
+            return svg ? (
+              <Div
+                key={id}
+                dangerouslySetInnerHTML={{ __html: svg }}
+                className="svg_mask"
+                color={color}
+              />
+            ) : (
+              <span>'Carregando...'</span>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+};
 
-    // Verificar se o slug da lâmina deve mudar
-    console.log('CONDICIONAL 1', this.props.lamina.ID !== nextProps.lamina.ID)
-    if (this.props.lamina.ID !== nextProps.lamina.ID) {
-      this.resetMasks()
-      return true
-    }
-
-    // Verificar se existe state.mascaras ou se está igual ao antigo ainda
-    console.log('CONDICIONAL 2', this.state.mascaras.length !== nextState.mascaras.length)
-    if (this.state.mascaras.length !== nextState.mascaras.length) return true
-
-    let emptySVG = false
-    this.state.mascaras.map(mascara => {
-      if (!mascara.svg) emptySVG = true
-    })
-    console.log('CONDICIONAL 3', emptySVG)
-    if (emptySVG) return true
-
-    console.log('CONDICIONAL ÚLTIMA', false)
-    return false
-  }
-
-  componentDidUpdate(prevProps) {
-    console.log('chamando UPDATE')
-    if (prevProps.lamina.ID !== this.props.lamina.ID) {
-      console.log('RESETA')
-      this.zeroMasks()
-    } else {
-      console.log('só CARREGA')
-      this.loadMasks()
-    }
-  }
-
-  render() {
-    console.log('chamando RENDER')
-
-    return (
-      <section id="microscope">
-        {this.props.lamina ? <div id="microscope_imgs">
-          <img src={this.props.lamina.imagem[0]} />
-          {this.state.mascaras ? this.state.mascaras.map(({ svg, color }) => {
-            console.log('render svg', typeof(svg))
-            return svg ? <Div
-              dangerouslySetInnerHTML={{ __html: svg }}
-              className="svg_mask"
-              color={color}
-            /> : 'Carregando...'
-            // return mascara.title
-          }) : null}
-          {/* <Zoom lens="200" href="lamina_y_200" top="45" left="45" /> */}
-        </div> : null}
-      </section>
-    )
-  }
-
-}
+export default Microscope;
