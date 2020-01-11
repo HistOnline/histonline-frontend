@@ -8,13 +8,12 @@ import Footer from './footer';
 
 import Laminas from '../services/crud/laminas';
 
-import Button from '@material-ui/core/Button';
-import { Fullscreen, KeyboardArrowDown } from '@material-ui/icons';
+import { KeyboardArrowDown } from '@material-ui/icons';
 
 const Lamina = props => {
 
   const [lamina, setLamina] = useState(null)
-  
+
   useEffect(() => {
     const slug = props.match.params.slug
     Laminas.get(slug)
@@ -32,7 +31,7 @@ const Lamina = props => {
           <section id="page" className={`wrap`}>
             {lamina ? [
               <section>
-                <img src={logo} className="logo" />
+                <img alt="Logo" src={logo} className="logo" />
                 <Microscope lamina={lamina}/>
                 <h3>ID: {props.match.params.slug}</h3>
                 <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
