@@ -3,7 +3,7 @@ import { Div } from '../styles/microscope'
 
 const loadMasks = (masks) => {
   return Promise.all((masks || []).map(({ vector }) => {
-    return fetch(vector).then(res => res.text());
+    return fetch(vector).then(res => res.text()).catch(err => console.log('Erro:', err));
   }));
 };
 
@@ -37,7 +37,7 @@ const Microscope = ({ lamina }) => {
                 color={color}
               />
             ) : (
-              <span>'Carregando...'</span>
+              <span>Carregando...</span>
             );
           })}
         </div>

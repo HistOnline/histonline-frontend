@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const Div = styled.div`
+  z-index: 2;
+  opacity: 0;
+  
   svg{
     path{
       stroke: ${({ color }) => color ? color : '#000' } !important;
