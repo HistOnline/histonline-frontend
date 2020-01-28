@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import InputPlaceholder from './input_placeholder'
-import logo from '../img/logo_white.png'
+
+import InputPlaceholder from '../../components/InputPlaceHolder'
+import logo from '../../img/logo_white.png'
+
 import axios from 'axios'
 
 /**

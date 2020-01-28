@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import ProtecetdPage from './protected_page';
-import Aside from './aside';
-import logo from '../img/logo_eosina.png';
-import Microscope from './microscope';
-import Footer from './footer';
+import ProtecetdPage from '../../components/ProtectedPage'
+import Aside from '../../components/Aside';
+import logo from '../../img/logo_eosina.png';
+import Microscope from './components/Microscope';
+import Footer from '../../components/Footer';
 
-import Laminas from '../services/crud/laminas';
+import Laminas from '../../services/crud/laminas';
 
 import { KeyboardArrowDown } from '@material-ui/icons';
 

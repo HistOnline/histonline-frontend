@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
 
-import ProtecetdPage from './protected_page';
-import Aside from './aside';
-import logo from '../img/logo_eosina.png';
-import Microscope from './microscope';
-import Footer from './footer';
-
-import Button from '@material-ui/core/Button';
-import { Fullscreen, KeyboardArrowDown } from '@material-ui/icons';
+import ProtecetdPage from '../../components/ProtectedPage';
+import Aside from '../../components/Aside';
+import logo from '../../img/logo_eosina.png';
+import Footer from '../../components/Footer';
 
 const Lamina = props => {
 

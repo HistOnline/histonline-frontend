@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Login from './login'
+
+import Login from '../../views/Login'
+
 import axios from 'axios'
 
 const ProtecetdPage = ({ children }) => {

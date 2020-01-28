@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Div } from '../styles/microscope'
+import { Div } from './styles'
 
 const loadMasks = (masks) => {
   return Promise.all((masks || []).map(({ vector }) => {

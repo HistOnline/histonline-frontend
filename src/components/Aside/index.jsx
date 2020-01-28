@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import IconButton from '@material-ui/core/IconButton';
-import { Menu, ExpandMore } from '@material-ui/icons';
+import { Menu } from '@material-ui/icons';
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Input from '@material-ui/core/Input';
 
-import Laminas from '../services/crud/laminas'
+import Laminas from '../../services/crud/laminas'
 
 export default class Aside extends Component {
   constructor(props){

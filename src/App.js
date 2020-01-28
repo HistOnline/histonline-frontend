@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Login from './components/login';
-import Main from './components/main';
-import Lamina from './components/lamina';
-import Err404 from './components/err404';
-import './scss/all.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Login from './views/Login';
+import Main from './views/Main';
+import Lamina from './views/Lamina';
+import Err404 from './views/Err404';
+
+import './scss/all.scss';
 
 class App extends Component {
   render() {

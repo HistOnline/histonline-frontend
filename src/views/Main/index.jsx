@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ProtecetdPage from './protected_page';
-import Aside from './aside';
-import logo from '../img/logo_eosina.png';
-import Footer from './footer';
+import ProtecetdPage from '../../components/ProtectedPage';
+import Aside from '../../components/Aside';
+import logo from '../../img/logo_eosina.png';
+import Footer from '../../components/Footer';
 
-class Main extends Component {
+export default class Main extends Component {
   
   state = {
     visibility: false,
@@ -31,5 +31,3 @@ class Main extends Component {
     );
   }   
 }
-
-export default Main;
