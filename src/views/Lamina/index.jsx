@@ -4,6 +4,7 @@ import ProtecetdPage from '../../components/ProtectedPage'
 import Aside from '../../components/Aside';
 import logo from '../../img/logo_eosina.png';
 import Microscope from './components/Microscope';
+import Description from './components/Description';
 import Footer from '../../components/Footer';
 
 import Laminas from '../../services/crud/laminas';
@@ -23,27 +24,6 @@ const Lamina = props => {
       .catch(err => console.log('Erro ao obter lâmina:', err))
   }, [props.match.params.slug])
 
-  
-  const filteredDescription = description => {
-    
-    let masks = lamina.mascaras
-
-    masks.map( function({ alias }){
-      var regex = new RegExp(` @${alias} `,"gi")
-      var matches = description.match(regex)
-      console.log('matches', matches, regex)
-      if(matches){
-        matches.map( function( match ){
-          console.log(match)
-          description = description.replace(match, ` <span class="blue">${match.replace(' ', '')}</span> `)
-        })
-      }
-    })
-
-    console.log('description', description)
-    return description
-  }
-
   return (
     <div>
       <ProtecetdPage>
@@ -57,10 +37,7 @@ const Lamina = props => {
                 <h3>ID: {props.match.params.slug}</h3>
                 <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
               </section>,
-              <section id="descricao_lamina">
-                <h1>Tecido X</h1>
-                <p>{filteredDescription(lamina.descricao)}</p>
-              </section>
+              <Description lamina={lamina}/>
             ] : "Carregando..."}
           </section>
         </main>
