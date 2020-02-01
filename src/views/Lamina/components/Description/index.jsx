@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import JsxParser from 'react-jsx-parser'
+import LaminaContext from '../../context'
+
+const MaskLink = ({alias}) => {
+  console.log('CHILDREN', alias)
+  return <strong>{alias}</strong>
+}
 
 const Description = ({ lamina }) => {
+
+  const context = useContext(LaminaContext)
 
   const filteredDescription = description => {
     
@@ -12,8 +21,9 @@ const Description = ({ lamina }) => {
         console.log('matches', matches, regex)
         if(matches){
           matches.map( function( match ){
-            console.log(match)
-            description = description.replace(match, ` <span class="blue">${match.replace(' ', '')}</span> `)
+            let replacedMatch = match.replace(' ', '')
+            replacedMatch = replacedMatch.replace('@', '')
+            description = description.replace(match, `<MaskLink alias='${replacedMatch}'/>`)
           })
         }
       })
@@ -25,7 +35,14 @@ const Description = ({ lamina }) => {
   return (
     <section id="descricao_lamina">
       <h1>Tecido X</h1>
-      <p>{filteredDescription(lamina.descricao)}</p>
+      <p><JsxParser
+        components={{ MaskLink }}  
+        jsx={filteredDescription(lamina.descricao)}
+        renderInWrapper={false}
+      /></p>
+      <pre>
+        {JSON.stringify(context, null, 2)}
+      </pre>
     </section>
   )
 }
