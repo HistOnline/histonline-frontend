@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 
 import ProtecetdPage from '../../components/ProtectedPage'
 import Aside from '../../components/Aside';
@@ -12,57 +12,57 @@ import Laminas from '../../services/crud/laminas';
 
 import { KeyboardArrowDown } from '@material-ui/icons';
 
+export default class Lamina extends Component {
+  static contexType = LaminaContext
 
-const Lamina = props => {
-  
-  const [lamina, setLamina] = useState(null)
-  
-  const context = {
+  state = {
     lamina: null,
     count: 0
   }
 
-  // Não funciona, transformar em classe
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     context.count = context.count+1
-  //     console.log(context.count)
-  //   }, 1000)
-  // }, [])
-
-  useEffect(() => {
-    const slug = props.match.params.slug
+  loadData = () => {
+    const slug = this.props.match.params.slug
     Laminas.get(slug)
       .then(response => {
-        setLamina(response.data)
+        this.setState({ lamina: response.data })
       })
       .catch(err => console.log('Erro ao obter lâmina:', err))
-  }, [props.match.params.slug])
+  }
+  componentDidMount(){
+    this.loadData()    
+  }
 
-  return (
-    <div>
-      <ProtecetdPage>
-        <main>
-          <Aside />
-          <section id="page" className={`wrap`}>
-            <LaminaContext.Provider value={context}>
-              {context.count}
-              {lamina ? [
-                <section>
-                  <img alt="Logo" src={logo} className="logo" />
-                  <Microscope lamina={lamina} />
-                  <h3>ID: {props.match.params.slug}</h3>
-                  <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
-                </section>,
-                <Description lamina={lamina} />
-              ] : "Carregando..."}
-            </LaminaContext.Provider>
-          </section>
-        </main>
-        <Footer />
-      </ProtecetdPage>
-    </div >
-  )
+  componentDidUpdate(prevProps){
+    if(this.props.match.params.slug !== prevProps.match.params.slug) this.loadData()
+  }
+
+
+  render(){
+
+    const lamina = this.state.lamina
+
+    return (
+      <div>
+        <ProtecetdPage>
+          <main>
+            <Aside />
+            <section id="page" className={`wrap`}>
+              <LaminaContext.Provider value={this.state}>
+                {lamina ? [
+                  <section>
+                    <img alt="Logo" src={logo} className="logo" />
+                    <Microscope lamina={lamina} />
+                    <h3>ID: {this.props.match.params.slug}</h3>
+                    <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
+                  </section>,
+                  <Description lamina={lamina} />
+                ] : "Carregando..."}
+              </LaminaContext.Provider>
+            </section>
+          </main>
+          <Footer />
+        </ProtecetdPage>
+      </div >
+    )
+  }
 }
-
-export default Lamina
