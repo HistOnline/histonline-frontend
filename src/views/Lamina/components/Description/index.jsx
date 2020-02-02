@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
 import JsxParser from 'react-jsx-parser'
 import LaminaContext from '../../context'
-
-const MaskLink = ({alias}) => {
-  console.log('CHILDREN', alias)
-  return <strong>{alias}</strong>
-}
+import MaskLink from './components/MaskLink'
 
 const Description = ({ lamina }) => {
 
