@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Div } from './styles'
+import LaminaContext from '../../context'
 
 const loadMasks = (masks) => {
   return Promise.all((masks || []).map(({ vector }) => {
@@ -7,8 +8,11 @@ const loadMasks = (masks) => {
   }));
 };
 
-const Microscope = ({ lamina }) => {
-  const { mascaras } = lamina;
+const Microscope = () => {
+  
+  const context = useContext(LaminaContext)
+  const lamina = context.lamina,
+  { mascaras } = lamina;
 
   const [svgs, setSvgs] = useState([]);
 
@@ -26,12 +30,13 @@ const Microscope = ({ lamina }) => {
       {lamina && (
         <div id="microscope_imgs">
           <img alt="" src={lamina.imagem[0]} />
-          {shouldRenderMasks && mascaras.map(({ color, id }, idx) => {
+          {shouldRenderMasks && mascaras.map(({ color, id, alias }, idx) => {
             const svg = svgs[idx];
 
             return svg ? (
               <Div
-                key={id}
+                key={alias}
+                status={context.masksByAlias[alias].status}
                 dangerouslySetInnerHTML={{ __html: svg }}
                 className="svg_mask"
                 color={color}
