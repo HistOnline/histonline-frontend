@@ -17,14 +17,22 @@ export default class Lamina extends Component {
 
   state = {
     lamina: null,
-    count: 0
+    masksByAlias: {}
   }
 
   loadData = () => {
     const slug = this.props.match.params.slug
     Laminas.get(slug)
       .then(response => {
-        this.setState({ lamina: response.data })
+        const lamina = response.data
+        let masksByAlias = {}
+        lamina.mascaras.map( mascara => {
+          masksByAlias[mascara.alias] = {
+            ...mascara,
+            status: false
+          }
+        })
+        this.setState({ lamina, masksByAlias })
       })
       .catch(err => console.log('Erro ao obter lâmina:', err))
   }
