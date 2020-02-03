@@ -37,30 +37,33 @@ function lightOrDark(color) {
 
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 127.5) {
-
     return 'light';
   }
   else {
-
     return 'dark';
   }
 }
 
 const MaskLink = ({ alias }) => {
 
+  const [status, setStatus] = useState(false)
+
   const context = useContext(LaminaContext)
   const mask = context.masksByAlias[alias]
-    console.log('color', context.masksByAlias, `'${alias}'`, context.masksByAlias[`${alias}`], color)
-    const { title, description, color } = mask
-    console.log('color', lightOrDark(color))
+  console.log('color', context.masksByAlias, `'${alias}'`, context.masksByAlias[`${alias}`], color)
+  const { title, description, color } = mask
+  console.log('color', lightOrDark(color))
 
-    return <Link 
+  return <Link
     color={color}
+    light={lightOrDark(color) === 'light'}
     onClick={e => context.toggleMaskStatus(alias)}
-    >
-      {title}
-      <div>{description}</div>
-    </Link>
+    onMouseOver={ e => setStatus(true)}
+    onMouseOut={ e => setStatus(false)}
+  >
+    {title}
+    {status && <div>{description}</div>}
+  </Link>
 }
 
 export default MaskLink
