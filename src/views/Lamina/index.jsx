@@ -17,7 +17,17 @@ export default class Lamina extends Component {
 
   state = {
     lamina: null,
-    masksByAlias: {}
+    masksByAlias: {},
+    setMaskStatus: ( alias, value ) => {
+      let masksByAlias = JSON.parse(JSON.stringify(this.state.masksByAlias))
+      masksByAlias[alias].status = value
+      this.setState({ masksByAlias })
+    },
+    toggleMaskStatus: alias => {
+      let masksByAlias = JSON.parse(JSON.stringify(this.state.masksByAlias))
+      masksByAlias[alias].status = !masksByAlias[alias].status
+      this.setState({ masksByAlias })
+    }
   }
 
   loadData = () => {

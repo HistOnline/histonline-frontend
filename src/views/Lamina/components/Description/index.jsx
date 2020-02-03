@@ -17,7 +17,7 @@ const Description = ({ lamina }) => {
         console.log('matches', matches, regex)
         if(matches){
           matches.map( function( match ){
-            let replacedMatch = match.replace(' ', '')
+            let replacedMatch = match.replace(/ /gi, '')
             replacedMatch = replacedMatch.replace('@', '')
             description = description.replace(match, `<MaskLink alias='${replacedMatch}'/>`)
           })
