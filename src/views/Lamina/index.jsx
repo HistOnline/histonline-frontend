@@ -70,7 +70,6 @@ export default class Lamina extends Component {
                   <section>
                     <img alt="Logo" src={logo} className="logo" />
                     <Microscope lamina={lamina} />
-                    <h3>ID: {this.props.match.params.slug}</h3>
                     <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
                   </section>,
                   <Description lamina={lamina} />

@@ -38,8 +38,7 @@ function lightOrDark(color) {
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 127.5) {
     return 'light';
-  }
-  else {
+  } else {
     return 'dark';
   }
 }
@@ -58,8 +57,8 @@ const MaskLink = ({ alias }) => {
     color={color}
     light={lightOrDark(color) === 'light'}
     onClick={e => context.toggleMaskStatus(alias)}
-    onMouseOver={ e => setStatus(true)}
-    onMouseOut={ e => setStatus(false)}
+    onMouseOver={e => setStatus(true)}
+    onMouseOut={e => setStatus(false)}
   >
     {title}
     {status && <div>{description}</div>}

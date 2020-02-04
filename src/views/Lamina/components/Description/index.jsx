@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import JsxParser from 'react-jsx-parser'
 import LaminaContext from '../../context'
 import MaskLink from './components/MaskLink'
+import { Section } from './styles'
 
 const Description = ({ lamina }) => {
 
@@ -29,17 +30,18 @@ const Description = ({ lamina }) => {
   }
 
   return (
-    <section id="descricao_lamina">
-      <h1>Tecido X</h1>
+    <Section>
+      <h1>{lamina.nome}</h1>
+      <h4>{lamina.coloracao} - {lamina.aumento}x</h4>
       <p><JsxParser
         components={{ MaskLink }}  
         jsx={filteredDescription(lamina.descricao)}
         renderInWrapper={false}
       /></p>
-      <pre>
+      {/* <pre>
         {JSON.stringify(context, null, 2)}
-      </pre>
-    </section>
+      </pre> */}
+    </Section>
   )
 }
 
