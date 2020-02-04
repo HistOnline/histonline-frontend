@@ -27,8 +27,20 @@ export default class Lamina extends Component {
       let masksByAlias = JSON.parse(JSON.stringify(this.state.masksByAlias))
       masksByAlias[alias].status = !masksByAlias[alias].status
       this.setState({ masksByAlias })
-    }
+    },
+    fullscreen: false,
+    setFullScreen: () => {
+      console.log('offsetTop', this.contentWrap.current.offsetTop)
+      console.log('offsetLeft', this.contentWrap.current.offsetLeft)
+      // Deve pegar dimensões também para manter e não engordar
+      this.contentWrap.current.style = {
+        position: 'absolute',
+        top: this.contentWrap.current.offsetTop
+      }
+     }
   }
+
+  contentWrap = React.createRef();
 
   loadData = () => {
     const slug = this.props.match.params.slug
@@ -67,12 +79,16 @@ export default class Lamina extends Component {
             <section id="page" className={`wrap`}>
               <LaminaContext.Provider value={this.state}>
                 {lamina ? [
-                  <section>
-                    <img alt="Logo" src={logo} className="logo" />
+                  <img alt="Logo" src={logo} className="logo" />,
+                  <section 
+                    ref={this.contentWrap}
+                    top={null}
+                    left={null}
+                  >
                     <Microscope lamina={lamina} />
                     <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
-                  </section>,
-                  <Description lamina={lamina} />
+                    <Description lamina={lamina} />
+                  </section>
                 ] : "Carregando..."}
               </LaminaContext.Provider>
             </section>

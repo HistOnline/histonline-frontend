@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Div } from './styles'
+import { Mask, Wrap } from './styles'
 import LaminaContext from '../../context'
 
 const loadMasks = (masks) => {
@@ -26,7 +26,7 @@ const Microscope = () => {
   const shouldRenderMasks = !!mascaras.length && !!svgs.length;
 
   return (
-    <section id="microscope">
+    <Wrap>
       {lamina && (
         <div id="microscope_imgs">
           <img alt="" src={lamina.imagem[0]} />
@@ -34,7 +34,7 @@ const Microscope = () => {
             const svg = svgs[idx];
 
             return svg ? (
-              <Div
+              <Mask
                 key={alias}
                 status={context.masksByAlias[alias].status}
                 dangerouslySetInnerHTML={{ __html: svg }}
@@ -45,9 +45,10 @@ const Microscope = () => {
               <span>Carregando...</span>
             );
           })}
+          <button onClick={e => context.setFullScreen() }>Modo tela cheia</button>
         </div>
       )}
-    </section>
+    </Wrap>
   );
 };
 
