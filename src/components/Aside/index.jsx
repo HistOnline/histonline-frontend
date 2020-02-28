@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import IconButton from '@material-ui/core/IconButton';
 import { Menu } from '@material-ui/icons';
@@ -61,9 +61,13 @@ export default class Aside extends Component {
         </ListItem>
         {v.laminas.map( lam => (
           <ListItem button>
-            <Link to={`/laminas/${lam.slug}`}>
-            {lam.nome}
-            </Link>
+            <NavLink 
+              exact={true}
+              to={`/laminas/${lam.slug}`}
+              activeClassName="selected"
+              >
+                {lam.nome}
+            </NavLink>
           </ListItem>
         ))}
       </div>
@@ -85,10 +89,14 @@ export default class Aside extends Component {
             {v.categoria.nome}
           </ListItem>
           {laminas_temp.map( lam => (
-            <ListItem button>
-              <Link to={`/laminas/${lam.slug}`}>
-            {lam.nome}
-            </Link>
+            <ListItem>
+              <NavLink 
+              exact={true}
+              to={`/laminas/${lam.slug}`}
+              activeClassName="selected"
+              >
+                {lam.nome}
+              </NavLink>
             </ListItem>
           ))}
         </div>
@@ -127,7 +135,7 @@ export default class Aside extends Component {
         <nav>
           <List
             component="ul"
-            subheader={<ListSubheader component="div">Selecione um assunto</ListSubheader>}
+            subheader={<ListSubheader component="div">Selecione um assunto ou lâmina</ListSubheader>}
           > 
             <ListItem>
               <Input

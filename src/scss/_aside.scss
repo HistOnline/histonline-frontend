@@ -1,109 +1,152 @@
-aside{
-    position: relative;
-    width: 300px;
-    min-height: 100vh;
-    float: left;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    border-right: 1px solid #ccc;
-    padding: 10px 15px;
+aside {
+  position: relative;
+  width: 300px;
+  min-height: 100vh;
+  float: left;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  padding: 10px 15px;
 
-    @media (max-width: 991.98px) {
-        width: 60px;
+  @media (max-width: 991.98px) {
+    width: 60px;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    border-color: transparent;
+
+    &.opened {
+      border-right: 1px solid #ccc;
+      background: #f1f1f1;
+      box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      display: none;
+    }
+  }
+
+  &.scrolled {
+    width: 60px;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    border-color: transparent;
+
+    &.opened {
+      border-right: 1px solid #ccc;
+      background: #f1f1f1;
+      box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+      width: 320px;
+
+      nav {
         display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 5;
-        border-color: transparent;
+      }
+    }
+
+    nav {
+      display: none;
+    }
+
+    #main_menu_bt {
+      display: block;
+    }
+  }
+
+  #main_menu_bt {
+    svg {
+      fill: $eosina;
+    }
+  }
+
+  .category {
+    width: 100%;
+    box-shadow: none;
+    text-align: left;
+    font-size: 14px;
+    margin: 0;
+
+    .category_title {
+      padding: 0;
+    }
+
+    .laminas_list {
+      padding: 0;
+
+      li {
+        padding: 10px 0 !important;
+      }
+    }
+  }
+
+  ul {
+    @include marginpadd0();
+    list-style: none;
+    margin: 0 !important;
+
+    > li {
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      > ul {
+        > li {
+          padding: 20px;
+        }
+      }
+    }
+
+    > div {
+      font-size: 15px;
+      line-height: 15px;
+
+      a {
+        color: $hematoxilina;
+        text-decoration: none;
+
+        &:hover{
+          color: $eosina;
+        }
         
-        &.opened{
-            border-right: 1px solid #ccc;
-            background: #f1f1f1;
-            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
-        }
+        &.selected{
+          color: #fff;
+          
+          &::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: $eosina;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+          }
 
-        nav{
-            display: none;
+          &::after{
+            content: '';
+            position: absolute;
+            height: 0;
+            width: 0;
+            top: calc(50% - 8px);
+            right: -15px;
+
+            border: 8px solid $eosina;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+          }
         }
+      }
     }
-
-    &.scrolled{
-        width: 60px;
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 5;
-        border-color: transparent;
-
-        &.opened{
-            border-right: 1px solid #ccc;
-            background: #f1f1f1;
-            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
-            width: 320px;
-
-            nav{
-                display: block;
-            }
-        }
-
-        nav{
-            display: none;
-        }
-
-        #main_menu_bt{
-            display: block;
-        }
-    }
-
-    #main_menu_bt{
-        svg{
-            fill: $eosina;
-        }
-    }
-
-    .category{
-        width: 100%;
-        box-shadow: none;
-        text-align: left;
-        font-size: 14px;
-        margin: 0;
-
-        .category_title{
-            padding: 0;
-        }
-
-        .laminas_list{
-            padding: 0;
-
-            li{
-                padding: 10px 0 !important;
-            }
-        }
-    }
-
-    ul{
-        @include marginpadd0();
-        list-style: none;
-        margin: 0 !important;
-
-        > li{
-
-            &:hover{
-                background: rgba(0, 0, 0, 0.1);
-            }
-
-            > ul{
-                > li{
-                    padding: 20px;
-                }
-            }
-        }
-    }
-
-    .category_title_list{
-        color: $eosina;
-        font-weight: bold;
-    }
+  }
+  
+  .category_title_list {
+    color: $eosina;
+    font-weight: bold;
+  }
 }
