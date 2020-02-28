@@ -45,7 +45,7 @@ const Microscope = () => {
               <span>Carregando...</span>
             );
           })}
-          <button onClick={e => context.setFullScreen() }>Modo tela cheia</button>
+          <button onClick={e => context.toggleFullScreen() }>Modo tela cheia</button>
         </div>
       )}
     </Wrap>

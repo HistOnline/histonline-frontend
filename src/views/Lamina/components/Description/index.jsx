@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import JsxParser from 'react-jsx-parser'
 import LaminaContext from '../../context'
 import MaskLink from './components/MaskLink'
 import { Section } from './styles'
@@ -8,39 +7,51 @@ const Description = ({ lamina }) => {
 
   const context = useContext(LaminaContext)
 
-  const filteredDescription = description => {
+  const FilteredDescription = description => {
+
     
-    let masks = lamina.mascaras
+    let masks = lamina.mascaras,
+    descriptionMasks = [],
+    descriptionText = []
+
     if(masks){
-      masks.map( function({ alias }){
+      masks.map( ({alias}) => {
         var regex = new RegExp(` @${alias} `,"gi")
         var matches = description.match(regex)
         console.log('matches', matches, regex)
         if(matches){
-          matches.map( function( match ){
+          matches.map( match => {
             let replacedMatch = match.replace(/ /gi, '')
             replacedMatch = replacedMatch.replace('@', '')
-            description = description.replace(match, `<MaskLink alias='${replacedMatch}'/>`)
+            description = description.replace(match, `{{{${replacedMatch}}}}`)
           })
         }
       })
     }
-  
-    return description
+
+    descriptionMasks = [...description.matchAll(/\{\{\{\w+\}\}\}/gi)]
+    descriptionMasks.forEach( (elem, idx, arr) => {
+      let _temp = elem[0].replace(/\{\{\{/, '').replace(/\}\}\}/, '')
+      arr[idx] = _temp
+    })
+
+    descriptionText = description.split(/\{\{\{\w+\}\}\}/gi)
+    
+    // Sempre vou assumir que tem um pequeno trecho antes da primeira máscara
+    let descriptionReturn = []
+    descriptionText.map( (text, index) => {
+      descriptionReturn.push(text)
+      descriptionMasks[index] && descriptionReturn.push(<MaskLink alias={descriptionMasks[index]}/>)
+    })
+    
+    return descriptionReturn
   }
 
   return (
     <Section>
       <h1>{lamina.nome}</h1>
       <h4>{lamina.coloracao} - {lamina.aumento}x</h4>
-      <p><JsxParser
-        components={{ MaskLink }}  
-        jsx={filteredDescription(lamina.descricao)}
-        renderInWrapper={false}
-      /></p>
-      {/* <pre>
-        {JSON.stringify(context, null, 2)}
-      </pre> */}
+      <p>{FilteredDescription(lamina.descricao)}</p>
     </Section>
   )
 }

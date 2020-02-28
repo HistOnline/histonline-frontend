@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {ContentSection} from './styles'
 import ProtecetdPage from '../../components/ProtectedPage'
 import Aside from '../../components/Aside';
 import logo from '../../img/logo_eosina.png';
@@ -14,6 +14,8 @@ import { KeyboardArrowDown } from '@material-ui/icons';
 
 export default class Lamina extends Component {
   static contexType = LaminaContext
+  contentWrap = React.createRef();
+  start = null
 
   state = {
     lamina: null,
@@ -28,19 +30,70 @@ export default class Lamina extends Component {
       masksByAlias[alias].status = !masksByAlias[alias].status
       this.setState({ masksByAlias })
     },
-    fullscreen: false,
-    setFullScreen: () => {
-      console.log('offsetTop', this.contentWrap.current.offsetTop)
-      console.log('offsetLeft', this.contentWrap.current.offsetLeft)
+    virgin: true,
+    fullScreen: false,
+    toggleFullScreen: () => {
+      console.log('prevOffsetTop', this.contentWrap.current.offsetTop)
+      console.log('prevOffsetLeft', this.contentWrap.current.offsetLeft)
+      console.log('PrevWidth', this.contentWrap.current.getBoundingClientRect().width)
+      console.log('prevHeight', this.contentWrap.current.getBoundingClientRect().height)
       // Deve pegar dimensões também para manter e não engordar
-      this.contentWrap.current.style = {
-        position: 'absolute',
-        top: this.contentWrap.current.offsetTop
+      // this.contentWrap.current.style = {
+      //   position: 'absolute',
+      //   top: this.contentWrap.current.offsetTop
+      // }
+      // this.contentWrap
+      if(!this.state.fullScreen){
+        this.setState({ 
+          virgin: false,
+          fullScreen: true,
+          contentStyles: {
+            top: this.contentWrap.current.offsetTop,
+            left: this.contentWrap.current.offsetLeft,
+            width: this.contentWrap.current.getBoundingClientRect().width,
+            height: this.contentWrap.current.getBoundingClientRect().height
+          }
+        })
+      }else{
+        this.setState({ 
+          virgin: false,
+          fullScreen: false
+        })
       }
+      // }, () => window.requestAnimationFrame(this.animationStep))
+     },
+     contentStyles: {
+       top: 0,
+       left: 0,
+       width: 0,
+       height: 0
      }
   }
 
-  contentWrap = React.createRef();
+
+  animationStep = timestamp => {
+    if(!this.start) this.start = timestamp
+    let frames = 500
+    let target = frames + this.start
+    let percent = (timestamp - this.start)/(target - this.start)
+    let targetWidth = window.innerWidth
+    let targetHeight = window.innerHeight
+    const { top, left, width, height } = this.state.contentStyles
+    
+    // console.log('timestamp', this.state.contentStyles.top, this.state.contentStyles.top - this.state.contentStyles.top*percent)
+    // console.log('timestamp', timestamp, target, percent)
+    console.log(this.contentWrap.current, this.contentWrap.current.style, `${width + (targetWidth-width)*percent}px !important`)
+    // top position animation
+    this.contentWrap.current.style.top = `${top - top*percent}px !important`
+    // this.contentWrap.current.style.left = `${left - left*percent}px !important`
+    // width animation
+    // this.contentWrap.current.style.width = `${width + (targetWidth-width)*percent}px !important`
+    if(timestamp < target){
+      window.requestAnimationFrame(this.animationStep)
+    }else{
+      this.start = null
+    }
+  }
 
   loadData = () => {
     const slug = this.props.match.params.slug
@@ -58,6 +111,7 @@ export default class Lamina extends Component {
       })
       .catch(err => console.log('Erro ao obter lâmina:', err))
   }
+
   componentDidMount(){
     this.loadData()    
   }
@@ -80,15 +134,19 @@ export default class Lamina extends Component {
               <LaminaContext.Provider value={this.state}>
                 {lamina ? [
                   <img alt="Logo" src={logo} className="logo" />,
-                  <section 
+                  <ContentSection 
                     ref={this.contentWrap}
-                    top={null}
-                    left={null}
+                    virgin={this.state.virgin}
+                    fullScreen={this.state.fullScreen}
+                    top={this.state.contentStyles.top}
+                    left={this.state.contentStyles.left}
+                    width={this.state.contentStyles.width}
+                    height={this.state.contentStyles.height}
                   >
                     <Microscope lamina={lamina} />
                     <span className="scroll_message"><KeyboardArrowDown /> Role a página para mais informações</span>
                     <Description lamina={lamina} />
-                  </section>
+                  </ContentSection>
                 ] : "Carregando..."}
               </LaminaContext.Provider>
             </section>
